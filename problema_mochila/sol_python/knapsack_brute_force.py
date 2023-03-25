@@ -51,7 +51,7 @@ def run_brute_force():
     bit_string_size = 8
     best_score = 0
     best_individual = []
-    knapsack_max_capacity = 10
+    knapsack_max_capacity = 9
     print('Number of combinations: ', 2**bit_string_size)
     iteration = 0
     for i in product([0, 1], repeat=bit_string_size):

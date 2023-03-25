@@ -23,31 +23,34 @@ Best individual:  (0, 0, 0, 0, 0, 1, 1, 0)
 Iteration:  7
 Best score:  9
 Best individual:  (0, 0, 0, 0, 0, 1, 1, 1)
-Iteration:  11
+Iteration:  26
 Best score:  10
-Best individual:  (0, 0, 0, 0, 1, 0, 1, 1)
+Best individual:  (0, 0, 0, 1, 1, 0, 1, 0)
 Iteration:  35
 Best score:  11
 Best individual:  (0, 0, 1, 0, 0, 0, 1, 1)
-Iteration:  38
-Best score:  13
-Best individual:  (0, 0, 1, 0, 0, 1, 1, 0)
+Iteration:  66
+Best score:  12
+Best individual:  (0, 1, 0, 0, 0, 0, 1, 0)
 Iteration:  162
 Best score:  14
 Best individual:  (1, 0, 1, 0, 0, 0, 1, 0)
-Iteration:  178
-Best score:  15
-Best individual:  (1, 0, 1, 1, 0, 0, 1, 0)
-(1, 0, 1, 1, 0, 0, 1, 0)
-Total time:  0.007005214691162109
+(1, 0, 1, 0, 0, 0, 1, 0)
+Total time:  0.013005733489990234
 ```
 
-Segun lo anterior la solución es:
+Segun lo anterior segun la parte de la salida:
+
+```
+Iteration:  162
+Best score:  14
+Best individual:  (1, 0, 1, 0, 0, 0, 1, 0)
+```
+
+De modo que la respuesta de los items seleccionados será:
 
 |Item ID|Item Name|Weight (kg)|Value ($)|
 |---|---|---|---|
 |1|Pearls|3|4|
 |3|Crown|4|5|
-|4|Coin|1|1|
 |7|Ring|2|5|
-
