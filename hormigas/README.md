@@ -124,28 +124,28 @@ Para la representación de un grado empleamos empleamos una matriz de adyacencia
    
    La **matriz de visibilidad**, contiene valores estáticos que indican la conveniencia a priori de pasar de un nodo $i$ a un nodo $j$. Para un grafo con $n$ vértices ($|\mathbf{V}∣=n$), la matriz es de $n \times n$. Comúnmente, $\eta_{ij}=1/d_{ij}$, donde $d_{ij}$ es la distancia o costo del enlace $(i,j)$.
 
-   $$
-   \eta = 
-   \begin{bmatrix}
-   \eta_{11} & \eta_{12} & \cdots & \eta_{1n} \\
-   \eta_{21} & \eta_{22} & \cdots & \eta_{2n} \\
-   \vdots & \vdots & \ddots & \vdots \\
-   \eta_{n1} & \eta_{n2} & \cdots & \eta_{nn}
-   \end{bmatrix}
-   $$
+$$
+\eta = 
+\begin{bmatrix}
+\eta_{11} & \eta_{12} & \cdots & \eta_{1n} \\
+\eta_{21} & \eta_{22} & \cdots & \eta_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\eta_{n1} & \eta_{n2} & \cdots & \eta_{nn}
+\end{bmatrix}
+$$
 
 2. **Matriz de Feromonas ($\tau$)**: información de feromonas (qué tan bueno ha resultado ser ese camino en el pasado).
 
    Esta es la matriz dinámica del algoritmo. Almacena la cantidad de feromona en cada enlace (arista) del grafo. A diferencia de la matriz heurística, los valores de esta matriz **cambian** en cada iteración del algoritmo debido a la evaporación y al depósito de nueva feromona por parte de las hormigas.
 
-   $$
-   \tau(t) = 
-   \begin{bmatrix}
-   \tau_{11}(t) & \tau_{12}(t) & \cdots & \tau_{1n}(t) \\
-   \tau_{21}(t) & \tau_{22}(t) & \cdots & \tau_{2n}(t) \\
-   \vdots & \vdots & \ddots & \vdots \\
-   \tau_{n1}(t) & \tau_{n2}(t) & \cdots & \tau_{nn}(t)
-   \end{bmatrix}
-   $$
+$$
+\tau(t) = 
+\begin{bmatrix}
+\tau_{11}(t) & \tau_{12}(t) & \cdots & \tau_{1n}(t) \\
+\tau_{21}(t) & \tau_{22}(t) & \cdots & \tau_{2n}(t) \\
+\vdots & \vdots & \ddots & \vdots \\
+\tau_{n1}(t) & \tau_{n2}(t) & \cdots & \tau_{nn}(t)
+\end{bmatrix}
+$$
 
    Donde $(t)$ indica el valor de la feromona en la iteración o tiempo $t$
