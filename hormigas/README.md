@@ -148,4 +148,4 @@ $$
 \end{bmatrix}
 $$
 
-   Donde $(t)$ indica el valor de la feromona en la iteración o tiempo $t$
+  Donde $(t)$ indica el valor de la feromona en la iteración o tiempo $t$
