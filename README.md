@@ -8,8 +8,9 @@ La tabla anterior fue tomada de las diapositivas de Botero: [Programación enter
 
 ## Problemas de aplicacion
 
-1. Problema de la mochila ([link](problema_mochila/README.md))
+1. Problema de la mochila ([link](problema_mochila/))
 2. Problema del viajero (Aun no se ha hecho)
+3. Hormigas
 
 
 
