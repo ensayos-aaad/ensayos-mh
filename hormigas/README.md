@@ -115,11 +115,25 @@ Donde:
 * **Grafo**: Grafo $G_C(\mathbf{V},\mathbf{E})$
 * **Vertices**: Conjunto de vertices (nodos) $V$
 * **Links**: Conjunto de enlaces (aristas) entre nodos $E$
-* **Solución**: Ruta tomada por las hormigas para llevar la comida. ($\mathbf{C}$). Es decir el conjunto de links que unen los vertices que siguen las hormigas para encontrar la comida.
+* **Solución**: Ruta tomada por las hormigas para llevar la comida. ($\mathbf{C}$). Es decir el conjunto de links que unen los vertices que siguen las hormigas para encontrar la comida. De modo que, el componente $(c_{ij})$ es la elección que hace la hormiga de viajar por esa carretera en particular, en ese momento de la construcción de su ruta.
 
-La representación anterior depende el problema y la disciplina en cuestión. 
+La representación anterior depende el problema y la disciplina en cuestión.
 
-Para la representación de un grado empleamos empleamos una matriz de adyacencia. En el caso de las hormigas, la representación sigue la del problema del vendedor viajero emplea dos matrices que las hormigas usan para tomar decisiones:
+
+* **Representación (a)**: Grafo completo (todos los puntos estan conectados) no dirigido ($K_4$)
+  * **Vertices (nodos)**: $V={1,2,3,4}$
+  * **Aristas (enlaces)**: $E = {(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)}$
+  * **Costo de cada arista**: $c_{ij}$
+
+$$
+G=(V,E)
+$$
+
+* **Representación (b)**: Grafo completo no dirigido ($K_6$)
+  * **Vertices (nodos)**: $V'={c_{12},c_{13},c_{14},c_{23},c_{24},c_{34}}$
+  * **Aristas (enlaces)**: $E'$ representan la relacion entre pares de componentes. Aqui, la feromona se deposita en las aristas.
+
+Para la representación de un grafo empleamos una matriz de adyacencia. En el caso de las hormigas, la representación sigue la del problema del vendedor viajero emplea dos matrices que las hormigas usan para tomar decisiones:
 1. **Matriz de Información Heurística ($\eta$)**: información heurística (qué tan bueno es un camino a simple vista).
    
    La **matriz de visibilidad**, contiene valores estáticos que indican la conveniencia a priori de pasar de un nodo $i$ a un nodo $j$. Para un grafo con $n$ vértices ($|\mathbf{V}∣=n$), la matriz es de $n \times n$. Comúnmente, $\eta_{ij}=1/d_{ij}$, donde $d_{ij}$ es la distancia o costo del enlace $(i,j)$.
@@ -149,3 +163,303 @@ $$
 $$
 
   Donde $(t)$ indica el valor de la feromona en la iteración o tiempo $t$
+
+#### Representando la comunicación
+
+Recordemos que la comunicación entre las hormigas de la colonia es posible gracias a la **estigmergia**. En la **estigmergia** las hormigas no se comunican entre sí directamente, sino que lo hacen modificando el entorno, y las otras hormigas reaccionan a ese entorno modificado.
+
+La comunicación se representa mediante la matriz de feromonas $\tau(t)$ (previamente mencionada).
+
+Una de las cosas que tiene que hacer una hormiga es decidir cual de los posibles caminos seguir. Para la selección la hormiga ha de tener en cuenta las feromonas:
+
+<p align = "center">
+<img src = "./img/eleccion_hormiga.png">
+</p>
+
+Esta elección se puede representar por la siguiente probabilidad de una hormiga $k$ que esta en el nodo $i$ seleccione el nodo $j$ esta dada por:
+
+$$
+p_{ij}^{k} = 
+\begin{cases} 
+\frac{\tau_{ij}^{\alpha} \cdot \eta_{ij}^{\beta}}{\sum_{c_{il} \in N(s^p)} \tau_{il}^{\alpha} \cdot \eta_{il}^{\beta}} & \text{if } c_{ij} \in N(s^p), \\
+0 & \text{otherwise,} 
+\end{cases}
+$$
+
+En lo que respecta al **numerador**, este dice que tan **atractivo** es el camino en cuestion, por eso se le conoce como **componente atractivo**:
+
+$$
+\tau_{ij}^{\alpha} \cdot \eta_{ij}^{\beta}
+$$
+
+Este tiene los siguientes compontentes:
+
+* **Feromona $(\tau_{ij})$**: La cantidad de feromona en el camino entre $i$ y $j$. **Experiencia colectiva**:  ¿qué tan bueno ha sido este camino para otras hormigas en el pasado?
+* **Información Heurística $(\eta_{ij})$**: Una medida de qué tan bueno parece el camino a priori. Generalmente es $1/d_{ij}$. **Logica local**: Un camino mas corto es mas deseable
+* **Importancia de la Feromona $(\alpha)$**: Un parámetro que controla la influencia del rastro de feromonas.
+* **Importancia de la Heurística $(\beta)$**: Un parámetro que controla la influencia de la distancia.
+
+Los parametros $\alpha$ y $\beta$ determinan cual de los dos elementos (feromona o heuristica) que inciden en la decisión de las hormigas tiene mas peso.
+
+La parte del **denominador** es la que normaliza la expresión:
+
+$$
+\sum_{c_{il} \in N(s^p)} \tau_{il}^{\alpha} \cdot \eta_{il}^{\beta}
+$$
+
+Donde:
+* **Suma de los puntajes de atracción de todos los caminos conectados al nodo $i$ $(\sum)$**.
+* **Indice para los vecidos de $i$ $(l)$**
+* **Vecindario Factible	$(N(s^p))$**: Representa el **conjunto de movimientos permitidos** para la hormiga. En otras palabras, aquellos lugares que la hormiga $k$ **aun no ha visitado**.
+
+La expresión $if c_{ij} ∈ N(s^p)$ se traduce como: "Si la elección de ir de $i$ a $j$ pertenece al conjunto de movimientos permitidos...". Es una manera formal de asegurarse de que la hormiga solo considere caminos válidos para su siguiente paso.
+
+
+#### Definición formal de un problema de optimización combinatoria
+
+Formula matemática para describir cualquier problema en el que se busca la mejor solución entre un número finito de posibilidades.
+
+<p align = "center">
+<img src = "./img/prob_OLC.png">
+</p>
+
+Componentes:
+1. Espacio de busqueda $(S)$
+2. Conjunto de restricciones $(\Omega)$
+3. Funcion objetivo $(f)$
+
+Finalmente, la solución óptima global $(s^*)$ es aquella solución factible cuyo valor, según la función objetivo, es mejor o igual que el de cualquier otra solución posible en todo el espacio de búsqueda.
+
+* **Ejemplo**: ¿Cual seria la representación a 4 ciudades? empleando la receta anterior?
+
+Volvamos al mapa:
+
+<p align = "center">
+<img src = "./img/grafo.png">
+</p>
+
+**Elementos basicos del problema**
+
+1. **Ciudades**: $V={1,2,3,4}$
+2. **Distancias**: Matriz de distancias $d_{ij}$ que nos da el costo de viajar de la ciudad $i$ a la ciudad $j$.
+
+
+**Representación del problema usando la notación $P(S,\Omega,f)$**
+
+1. **Espacio de Búsqueda $(S)$**: todas las posibles rutas, sin importar si son válidas o no.
+   * **Variables de decisión (X_i)**: Ciudad recorrida en la posición $i$ en el viaje.
+     * **$X_1$**: La primera ciudad en la ruta. 
+     * **$X_2$**: La segunda ciudad en la ruta. 
+     * **$X_3$**: La tercera ciudad en la ruta. 
+     * **$X_4$**: La cuarta ciudad en la ruta. 
+   * **Dominio de las variables**: $X_i \in \{1,2,3,4\}$
+   * **Espacio de Búsqueda $(S)$**: Una posible solución $s$ es una secuencia $(x_1,x_2,x_3,x_4)$ es una recuencia que representa un orden para visitar las ciudades. Por lo tanto $S$ es el conjunto de **todas las permutaciones** de las 4 ciudades. Por ejemplo una posible solucion es $s=(3,1,2,4)$. El tamaño de $S$ son todas las rutas posibles es $n!=4!=24$
+2. **Restricciones $(\Omega)$**: Reglas que una ruta debe seguir para ser válida.
+   * Cada ciudad debe ser visitada **exactamente una vez**.
+   
+   Cada ruta posible $s$ cumple la restricción, por lo tanto todas las soluciones en $S$ son **factibles**.
+3. **Función objetivo $(f)$**: calcula el **costo total** de una ruta determinada. El objetivo es minimizar este valor.
+   * **Cálculo de la Función**: Para una solución $s=(x_1, x_2, x_3, x_4)$, la función $f(s)$ suma las distancias entre ciudades consecutivas y, fundamentalmente, la distancia para volver al punto de partida.
+
+$$
+f(x) = d_{x_{1},x_{2}} + d_{x_{2},x_{3}} + d_{x_{3},x_{4}} + d_{x_{4},x_{1}}
+$$
+   
+   * **Meta**:  Encontrar la solución óptima global $s^*$ tal que su costo $f(s^∗)$ sea el más bajo de todas las 24 posibles rutas en $S$.
+  
+
+## Planteamiento del problema
+
+<p align = "center">
+<img src = "./img/problema.png">
+</p>
+
+### Representacion estandar
+
+---
+**Minimizar**:
+
+$$
+Z = \sum_{i=1}^{4} \sum_{j=1, j\neq i}^{4} d_{ij} \cdot x_{ij}
+$$
+
+**Sujeto a**
+
+1. Restriciones de entrad y salida
+
+$$
+\sum_{j=1, j\neq i}^{4} x_{ij} = 1 \quad \text{para } i \in \{1, 2, 3, 4\}
+$$
+
+$$
+\sum_{i=1, i\neq j}^{4} x_{ij} = 1 \quad \text{para } j \in \{1, 2, 3, 4\}
+$$
+
+2. Eliminacion de subtours
+
+$$
+\left( \sum_{i \in S} \sum_{j \notin S} x_{ij} \right) - s_S = 1 \quad \forall S \subset V, S \neq \emptyset
+$$
+
+3. No negatividad
+
+$$
+x_{ij} \ge 0
+$$
+
+$$
+s_S \ge 0
+$$
+---
+
+**Nota**: La variable $s_S$ representa el número de caminos "extra" por encima del mínimo requerido de $1$.
+
+Por ejemplo, si para un grupo de ciudades $S$ hay 3 caminos que lo conectan con el exterior, la suma sería 3. Para que la ecuación se cumpla, $s_S$ tendría que valer 2 (es decir, 3−2=1).
+
+El subíndice $S$ indica que hay una variable de excedente única y diferente para cada posible subconjunto S de ciudades.
+
+La forma matricial queda....
+
+Pendiente...
+
+
+### Representacion canonica
+
+1. **Minimizad la Funcion objetivo**: 
+
+$$
+Z = \sum_{i=1}^{4} \sum_{j=1, j\neq i}^{4} d_{ij} \cdot x_{ij}
+$$
+
+2. **Sujeto a**:
+   
+* **Restricciones de salida $(\sum{x_{ij}}=1)$**: Estas aseguran que cada ciudad se abandona una sola vez.
+
+$$
+\sum_{j=1, j\neq i}^{4} x_{ij} \ge 1 \quad \text{para } i \in \{1, 2, 3, 4\}
+$$
+
+$$
+\sum_{j=1, j\neq i}^{4} -x_{ij} \ge -1 \quad \text{para } i \in \{1, 2, 3, 4\}$$
+
+   
+   * **Restricciones de entrada $(\sum{x_{ij}}=1)$**: Estas aseguran que a cada ciudad se llega una sola vez.
+   
+$$
+\sum_{i=1, i\neq j}^{4} x_{ij} \ge 1 \quad \text{para } j \in \{1, 2, 3, 4\}
+$$
+
+$$
+\sum_{i=1, i\neq j}^{4} -x_{ij} \ge -1 \quad \text{para } j \in \{1, 2, 3, 4\}
+$$
+
+3. **Eliminación de Sub-tours**: restricción que garantiza una única ruta conectada.
+
+$$
+\sum_{i \in S} \sum_{j \notin S} x_{ij} \ge 1 \quad \forall S \subset V, S \neq \emptyset
+$$
+
+4. **No Negatividad de las Variables**: 
+
+$$x_{ij} \ge 0$$
+
+Las variables $x_{ij}$ son binarias, $x_{ij} \in \{0,1\}$, lo cual hace que cumplan la condicion de no negatividad
+
+En resumen se pide:
+
+**Minimizar**:
+
+$$
+Z = \sum_{i=1}^{4} \sum_{j=1, j\neq i}^{4} d_{ij} \cdot x_{ij}
+$$
+
+**Sujeto a**:
+
+$$
+\sum_{j=1, j\neq i}^{4} x_{ij} \ge 1 \quad \text{para } i \in \{1, 2, 3, 4\}
+$$
+
+$$
+\sum_{j=1, j\neq i}^{4} -x_{ij} \ge -1 \quad \text{para } i \in \{1, 2, 3, 4\}$$
+
+$$
+\sum_{i=1, i\neq j}^{4} x_{ij} \ge 1 \quad \text{para } j \in \{1, 2, 3, 4\}
+$$
+
+$$
+\sum_{i=1, i\neq j}^{4} -x_{ij} \ge -1 \quad \text{para } j \in \{1, 2, 3, 4\}
+$$
+
+$$
+\sum_{i \in S} \sum_{j \notin S} x_{ij} \ge 1 \quad \forall S \subset V, S \neq \emptyset
+$$
+
+
+$$
+x_{ij} \ge 0
+$$
+
+La forma matricial de lo anterior sigue el siguiente formado:
+
+**Vector de variables de decisión**:
+
+$$
+\mathbf{x} = 
+\begin{bmatrix}
+x_{12} \\ x_{13} \\ x_{14} \\ x_{21} \\ x_{23} \\ x_{24} \\ x_{31} \\ x_{32} \\ x_{34} \\ x_{41} \\ x_{42} \\ x_{43}
+\end{bmatrix}
+$$
+
+**Vector de costos transpuestos**
+
+$$
+\mathbf{c}^T = 
+\begin{bmatrix}
+d_{12} & d_{13} & d_{14} & d_{21} & d_{23} & d_{24} & d_{31} & d_{32} & d_{34} & d_{41} & d_{42} & d_{43}
+\end{bmatrix}
+$$
+**Vector b**
+
+$$
+\mathbf{b} = 
+\begin{bmatrix}
+1 \\ -1 \\ 1 \\ -1 \\ 1 \\ -1 \\ 1 \\ -1 \\ \hline 1 \\ -1 \\ 1 \\ -1 \\ 1 \\ -1 \\ 1 \\ -1
+\end{bmatrix}
+$$
+
+**Matriz A**:
+
+$$
+\mathbf{A} = 
+\begin{bmatrix}
+% Salir de 1 (>= y <=)
+1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+-1 & -1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+% Salir de 2 (>= y <=)
+0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & -1 & -1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+% Salir de 3 (>= y <=)
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & -1 & -1 & -1 & 0 & 0 & 0 \\
+% Salir de 4 (>= y <=)
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & -1 & -1 \\
+\hline
+% Entrar a 1 (>= y <=)
+0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 & -1 & 0 & 0 & -1 & 0 & 0 \\
+% Entrar a 2 (>= y <=)
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+-1 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & -1 & 0 \\
+% Entrar a 3 (>= y <=)
+0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & -1 & 0 & 0 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & -1 \\
+% Entrar a 4 (>= y <=)
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & -1 & 0 & 0 & -1 & 0 & 0 & -1 & 0 & 0 & 0
+\end{bmatrix}
+$$
+
+> [!tip]
+> * La parte superior de la matriz (A) y del vector (b) corresponde a las 8 restricciones de salida (las reglas para abandonar cada una de las 4 ciudades).
+> * La parte inferior corresponde a las 8 restricciones de entrada (las reglas para llegar a cada una de las 4 ciudades).
