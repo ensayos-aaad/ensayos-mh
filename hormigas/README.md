@@ -361,7 +361,9 @@ $$
 
 4. **No Negatividad de las Variables**: 
 
-$$x_{ij} \ge 0$$
+$$
+x_{ij} \ge 0
+$$
 
 Las variables $x_{ij}$ son binarias, $x_{ij} \in \{0,1\}$, lo cual hace que cumplan la condicion de no negatividad
 
