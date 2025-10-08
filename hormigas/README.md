@@ -310,6 +310,7 @@ $$
 $$
 s_S \ge 0
 $$
+
 ---
 
 **Nota**: La variable $s_S$ representa el número de caminos "extra" por encima del mínimo requerido de $1$.
@@ -420,6 +421,7 @@ $$
 d_{12} & d_{13} & d_{14} & d_{21} & d_{23} & d_{24} & d_{31} & d_{32} & d_{34} & d_{41} & d_{42} & d_{43}
 \end{bmatrix}
 $$
+
 **Vector b**
 
 $$
