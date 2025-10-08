@@ -23,6 +23,7 @@ To Do
     * **pytudes** [[link]](https://github.com/norvig/pytudes)
       * **The Traveling Salesperson Problem** [[link]](https://github.com/norvig/pytudes/blob/main/ipynb/TSP.ipynb)
     * **Fundamentals of Linear Algebra and Optimization**[[link]](https://www.cis.upenn.edu/~cis5150/) 
+    * **Graph Neural Networks and Transformer workshop** [[link]](https://enccs.github.io/gnn-transformers/)
   
 
 
