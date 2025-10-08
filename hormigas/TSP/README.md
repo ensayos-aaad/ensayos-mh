@@ -1,7 +1,32 @@
 # TSP
 
+## Sobre el TSP
+
+To Do
+
+## Ejemplo muy basico a 4 ciudades
 
 
+
+## Extención del ejemplo a mas ciudades
+
+To Do
+
+## Planteamiento algoritmico
+
+To Do
+
+
+- [ ] **Conceptos introductorios**:
+    * **Curso Transportation Logistics** [[link]](https://prolog.univie.ac.at/teaching/LVAs/KFK-TL/WS%2012/)
+    * **Gurobi Modeling Examples** [[link1]](https://gurobi.github.io/modeling-examples/traveling_salesman/)  [[link2]](https://github.com/Gurobi/modeling-examples)
+    * **pytudes** [[link]](https://github.com/norvig/pytudes)
+      * **The Traveling Salesperson Problem** [[link]](https://github.com/norvig/pytudes/blob/main/ipynb/TSP.ipynb)
+    * **Fundamentals of Linear Algebra and Optimization**[[link]](https://www.cis.upenn.edu/~cis5150/) 
+  
+
+
+<!--
 
 ## Referencias a la loca
 
@@ -47,3 +72,4 @@ Por lo menos las bases pueden consultarse de: https://prolog.univie.ac.at/teachi
 * https://prolog.univie.ac.at/teaching/LVAs/KFK-TL/WS%2012/TL-Part3-TSP-Handout.pdf
 * https://www.sci.brooklyn.cuny.edu/~zhou/papers/kit10.pdf
 
+-->
