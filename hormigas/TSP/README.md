@@ -6,7 +6,7 @@ Un modelo $P = (S, \Omega, f)$ de un problema de optimización combinatoria cons
 
 * Un espacio de búsqueda $S$ definido sobre un conjunto finito de variables de decisión discretas $X_i$, $i=1, \dots, n$;
 * Un conjunto $\Omega$ de restricciones entre las variables; y
-* Una función objetivo $f: S \to \mathbb{R}_0^+$ a ser minimizada.$^2$
+* Una función objetivo $f: S \to \mathbb{R}_0^+$ a ser minimizada.
 
 La variable genérica $X_i$ toma valores en $D_i = \{v_i^1, \dots, v_i^{|D_i|}\}$. Una solución factible $s \in S$ es una asignación completa de valores a las variables que satisface todas las restricciones en $\Omega$.
 
@@ -31,7 +31,7 @@ Vamos a proceder a plantear el problema del TSP como un problema de optimizacion
 
 **1. Espacio de busqueda $(S)$** 
 
-**S**: Grafo dirigido con todas las posibles rutas, validas y no que puede tomar el vendedor. $S \in \reals^{4}$
+**S**: Grafo dirigido con todas las posibles rutas, validas y no que puede tomar el vendedor. $S \in \mathbb{R}^{4}$
 
 $$
 S = \begin{bmatrix}
@@ -40,7 +40,7 @@ x_{21} & x_{22} & x_{23} & x_{24} \\
 x_{31} & x_{32} & x_{33} & x_{34} \\
 x_{41} & x_{42} & x_{43} & x_{44} \\
 \end{bmatrix}
-\quad \text{donde } x_{ij} \in \{0, 1\}
+\quad \text{donde } x_{ij} \in \left\{0, 1\right\}
 $$
 
 Por ejemplo, una posible solucion una ruta como la siguiente: $1 \to 3 \to 4 \to 2 \to 1$ lo cual implica que: $x_{13}=1, x_{34}=1, x_{42}=1, x_{21}=1$ es decir:
@@ -68,7 +68,7 @@ $$
 Por lo tanto, para este problema, en general $X$ es una matriz binaria de $4\times4$
 
 $$
-X \in \{0, 1\}^{4 \times 4}
+X \in \left\{0, 1\right\}^{4 \times 4}
 $$
 
 La matrix $X$ puede ser vista como un conjunto de vectores fila:
@@ -116,7 +116,7 @@ X_4
 \end{bmatrix}
 $$
 
-Donde cada $X_i$ es un vector binario de cuatro elementos: $X_i \in \{0,1\}^4$ y por lo tanto $X$ sera un vector de vectores donde se representa la matriz de adyacencias de una forma plana:
+Donde cada $X_i$ es un vector binario de cuatro elementos: $X_i \in \left\{0,1\right\}^4$ y por lo tanto $X$ sera un vector de vectores donde se representa la matriz de adyacencias de una forma plana:
 
 $$
 X=[X_1, X_2, X_3, X_4]
@@ -128,7 +128,7 @@ $$
 x=[0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0]
 $$
 
-donde $x\in\{0,1\}^{n^2}$, es decir $x\in\{0,1\}^{16}$
+donde $x\in\left\{0,1\right\}^{n^2}$, es decir $x\in\{0,1\}^{16}$
 
 Finalmente, la ultima forma de representación es por medio de un **vector de ruta (Permutacion) $P = [\pi_1,\pi_2,...,\pi_n]$**, donde para este caso la ruta $1 \to 3 \to 4 \to 2 \to 1$ esta dada por el vector $P$:
 
@@ -146,7 +146,7 @@ Finalmente, tambien podemos referirnos a $X$ como un vector de permutación $P$,
 De modo que para la ruta: $1 \to 3 \to 4 \to 2 \to 1$, el vector $X$ seria el vector de enteros: $X=[1,3,4,2]$ siendo para esta definición cada $X_i$:
 
 $$
-X_i\in\{1,2,3,4\}
+X_i\in\left\{1,2,3,4\right\}
 $$
 
 **2. Funcion objetivo $(f)$**
