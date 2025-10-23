@@ -1,5 +1,17 @@
 # TSP
 
+Ver las siguientes [diapositivas](https://cs.unibo.it/~tong.liu3/mzn/slides_mzn.pdf)
+* https://www.minizinc.org/
+* https://people.eng.unimelb.edu.au/pstuckey/
+* https://www.learnpython.org/en/Welcome
+* https://cs.unibo.it/~tong.liu3/bbs_2018.html
+* https://github.com/jixinfeng/discopt-soln
+* https://github.com/France1/Discrete-Optimization-Coursera
+* https://github.com/kouei/discrete-optimization
+* https://github.com/shash42/DiscreteOptimization
+* https://github.com/MiniZinc/minizinc-examples/tree/master?tab=readme-ov-file
+* https://www.minizinc.org/
+
 ## Sobre el TSP
 
 To Do
@@ -14,7 +26,10 @@ To Do
 
 ## Planteamiento algoritmico
 
-To Do
+Referencia principal: 
+* https://cs.unibo.it/~tong.liu3/mzn/slides_mzn.pdf
+* https://cs.unibo.it/~tong.liu3/bbs_2018.html
+ 
 
 
 - [ ] **Conceptos introductorios**:

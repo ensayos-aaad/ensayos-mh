@@ -1,0 +1,2 @@
+- Este no es un problema de optimizacion discreto. 
+- Es un problema de satisfaccion discreto.
